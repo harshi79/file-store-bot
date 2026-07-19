@@ -5,6 +5,7 @@ from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
+from config import MAX_BATCH_SIZE
 from helper.helper_func import decode, delete_files, force_sub, get_messages
 
 
@@ -37,7 +38,7 @@ async def start_command(client: Client, message: Message):
         if len(ids) == 2:
             step = 1 if ids[0] <= ids[1] else -1
             ids = list(range(ids[0], ids[1] + step, step))
-        if len(ids) > 200:
+        if len(ids) > MAX_BATCH_SIZE:
             return await message.reply("This link contains too many files. Ask an admin for a smaller batch link.")
     except (IndexError, ValueError, UnicodeDecodeError) as exc:
         client.LOGGER(__name__, client.name).warning("Invalid start link: %s", exc)

@@ -17,13 +17,27 @@ This fork is ready for a **Render free Web Service**, Docker, and external uptim
 
 ## Configure it
 
-Copy the template, then replace every example value:
+Choose **one** configuration method:
 
-```bash
-cp setup.example.json setup.json
-```
+- **Easy / one bot:** copy the fully commented environment template. This is ideal for Render's Environment page.
 
-`setup.json` is a JSON **array**, so it can contain more than one bot configuration. Most deployments need one object only.
+  ```bash
+  cp .env.example .env
+  # Edit .env, then export it locally before running:
+  set -a; . ./.env; set +a
+  ```
+
+  The application reads these individual variables directly; no extra dotenv package is needed. `.env` is ignored by Git.
+
+- **Advanced / multiple bots:** copy the JSON template, then replace every example value:
+
+  ```bash
+  cp setup.example.json setup.json
+  ```
+
+  `setup.json` is a JSON **array**, so it can contain more than one bot configuration. Most deployments need one object only. On Render, its complete content can instead be stored as the secret `SETUP_JSON`.
+
+**Priority:** `SETUP_JSON` → individual environment variables (when `BOT_TOKEN` is set) → local `setup.json`.
 
 | Field | Required | What it is / where to get it |
 | --- | --- | --- |
@@ -81,7 +95,9 @@ Open `http://localhost:10000/healthz`; it should return `{"status": "ok"}`. Set 
 
 1. Push this repository to GitHub, then in Render choose **New → Web Service** and connect the repo.
 2. Choose **Docker** as the runtime. The included `Dockerfile` installs dependencies and runs the app.
-3. In **Environment**, add a secret named `SETUP_JSON`. Its value is the complete JSON from your configured `setup.json` file (including the outer `[` and `]`). Do **not** add it as a build variable.
+3. In **Environment**, choose one option:
+   - **Recommended for one bot:** open [`.env.example`](.env.example) and add each uncommented variable to Render one at a time. Mark `BOT_TOKEN`, `API_HASH`, and `MONGODB_URI` as **Secret**. Do not add `PORT`; Render supplies it.
+   - **For multiple bots:** add one Secret named `SETUP_JSON`, with the complete JSON from your configured `setup.json` (including the outer `[` and `]`). Do not add it as a build variable.
 4. Deploy. Render provides `PORT` automatically; do not hard-code a port.
 5. When deployment is live, open `https://YOUR-SERVICE.onrender.com/healthz`. It must return `{"status":"ok"}` before configuring the monitor.
 

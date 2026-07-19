@@ -14,6 +14,8 @@ def env_int(name: str, default: int) -> int:
 
 PORT = env_int("PORT", 10000)  # Render supplies PORT automatically.
 MAX_BATCH_SIZE = env_int("MAX_BATCH_SIZE", 200)
+if not 1 <= MAX_BATCH_SIZE <= 200:
+    raise RuntimeError("MAX_BATCH_SIZE must be between 1 and 200.")
 
 
 def LOGGER(name: str, client_name: str) -> logging.Logger:
