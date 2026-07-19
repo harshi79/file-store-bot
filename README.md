@@ -135,7 +135,3 @@ For production, supply `SETUP_JSON` through your platform's secret manager, not 
 - Link payloads are validated, and batch retrieval is capped at 200 messages to avoid accidental overload.
 - Runtime setting changes made through Telegram are in memory only; update your secret/configuration before a redeploy if you want them to persist.
 - Make the database channel private and grant the bot only the permissions it needs.
-
-## License and attribution
-
-This project is derived from [ArihantSharma/FileStoreBot](https://github.com/ArihantSharma/FileStoreBot) and remains licensed under GPL-3.0; see [LICENSE](LICENSE).
