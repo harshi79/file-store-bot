@@ -1,0 +1,27 @@
+[
+  {
+    "session": "filestore_bot",
+    "token": "123456789:AAExampleReplaceWithYourBotToken",
+    "api_id": 12345678,
+    "api_hash": "0123456789abcdef0123456789abcdef",
+    "owner_id": 123456789,
+    "admins": [123456789],
+    "db_uri": "mongodb+srv://USERNAME:PASSWORD@cluster.example.mongodb.net/?retryWrites=true&w=majority",
+    "db_name": "filestorebot",
+    "db": -1001234567890,
+    "workers": 8,
+    "fsubs": [],
+    "auto_del": 0,
+    "protect": false,
+    "disable_btn": true,
+    "messages": {
+      "START": "Hello {mention}! Send me a file link to retrieve it.",
+      "FSUB": "Please join the required channel(s) to continue.",
+      "ABOUT": "A private file-store bot.",
+      "REPLY": "You are not allowed to use this command.",
+      "START_PHOTO": "",
+      "FSUB_PHOTO": "",
+      "CAPTION": ""
+    }
+  }
+]
