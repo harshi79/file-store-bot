@@ -1,0 +1,11 @@
+services:
+  - type: web
+    runtime: docker
+    name: filestorebot
+    plan: free
+    healthCheckPath: /healthz
+    envVars:
+      # Add your real configuration in Render Dashboard -> Environment.
+      # sync: false prevents secrets from being committed to this repository.
+      - key: SETUP_JSON
+        sync: false

@@ -93,8 +93,8 @@ Open `http://localhost:10000/healthz`; it should return `{"status": "ok"}`. Set 
 
 ## Deploy on Render (free Web Service)
 
-1. Push this repository to GitHub, then in Render choose **New → Web Service** and connect the repo.
-2. Choose **Docker** as the runtime. The included `Dockerfile` installs dependencies and runs the app.
+1. Push this repository to GitHub, then in Render choose **New → Blueprint** and select the repository. Render reads [`render.yaml`](render.yaml), creates a free Docker Web Service, and uses `/healthz` as its health check. Alternatively choose **New → Web Service**, connect the repo, and explicitly choose **Docker** as the runtime.
+2. Do **not** use Render's default Python start command (`gunicorn your_application.wsgi`); this is not a Django/Gunicorn application. Docker runs the included `Dockerfile`, which starts `python main.py`.
 3. In **Environment**, choose one option:
    - **Recommended for one bot:** open [`.env.example`](.env.example) and add each uncommented variable to Render one at a time. Mark `BOT_TOKEN`, `API_HASH`, and `MONGODB_URI` as **Secret**. Do not add `PORT`; Render supplies it.
    - **For multiple bots:** add one Secret named `SETUP_JSON`, with the complete JSON from your configured `setup.json` (including the outer `[` and `]`). Do not add it as a build variable.
