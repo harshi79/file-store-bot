@@ -98,7 +98,7 @@ Open `http://localhost:10000/healthz`; it should return `{"status": "ok"}`. Set 
 3. In **Environment**, choose one option:
    - **Recommended for one bot:** open [`.env.example`](.env.example) and add each uncommented variable to Render one at a time. Mark `BOT_TOKEN`, `API_HASH`, and `MONGODB_URI` as **Secret**. Do not add `PORT`; Render supplies it.
    - **For multiple bots:** add one Secret named `SETUP_JSON`, with the complete JSON from your configured `setup.json` (including the outer `[` and `]`). Do not add it as a build variable.
-4. Deploy. Render provides `PORT` automatically; do not hard-code a port.
+4. Deploy. Render provides `PORT` automatically; do not hard-code a port. Native Python deployments use the included `.python-version` (Python 3.11.11), because PyroFork is not compatible with Render's Python 3.14 default.
 5. When deployment is live, open `https://YOUR-SERVICE.onrender.com/healthz`. It must return `{"status":"ok"}` before configuring the monitor.
 
 Render free services can spin down after inactivity. This bot has a web listener so Render accepts it as a Web Service, but a monitor is useful for periodic liveness requests. Do not rely on a free service for critical workloads; free-plan behavior and limits can change.
